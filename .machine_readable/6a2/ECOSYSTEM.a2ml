@@ -1,0 +1,42 @@
+;; SPDX-License-Identifier: PMPL-1.0-or-later
+;; ECOSYSTEM.scm - Ecosystem positioning
+
+(ecosystem
+  (version . "1.0.0")
+  (name . "me-dialect-playground")
+  (type . "educational-language")
+  (purpose . "Programming language for children ages 8-12")
+
+  (position-in-ecosystem
+    ((parent . "language-playgrounds")
+     (grandparent . "nextgen-languages")
+     (category . "educational-languages")))
+
+  (target-audience
+    ((age-range . "8-12")
+     (experience . "none-required")
+     (context . "classroom-or-home")))
+
+  (related-projects
+    ((mylang-playground
+       ((relationship . "graduation-path")
+        (description . "When ready (13+), progress to Solo dialect")))
+     (scratch
+       ((relationship . "inspiration")
+        (description . "Visual block-based programming for comparison")))
+     (logo
+       ((relationship . "inspiration")
+        (description . "Classic educational language with turtle graphics")))))
+
+  (what-this-is
+    ("HTML-like programming for kids"
+     "Visual and immediate feedback"
+     "Safe sandbox environment"
+     "Progressive complexity curriculum"
+     "Fun game creation"))
+
+  (what-this-is-not
+    ("Professional programming language"
+     "Part of Solo/Duet/Ensemble family"
+     "Complex systems programming"
+     "AI integration (that's Duet)")))

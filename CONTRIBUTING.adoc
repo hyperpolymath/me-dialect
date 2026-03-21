@@ -1,0 +1,122 @@
+// SPDX-License-Identifier: PMPL-1.0-or-later
+= Contributing to Me Language
+
+Thank you for wanting to help make programming accessible to children!
+
+== Getting Started
+
+1. Fork the repository
+2. Create a feature branch from `main`
+3. Sign off commits (`git commit -s`)
+4. Submit a pull request
+
+== Development Setup
+
+[source,bash]
+----
+# Clone and enter directory
+git clone https://github.com/hyperpolymath/me-dialect-playground.git
+cd me-dialect-playground
+
+# Install dependencies (Deno required per RSR)
+deno task dev
+
+# Run tests
+just test
+
+# Run the demo
+just demo
+----
+
+== Guidelines for Child-Friendly Development
+
+When contributing to Me, please keep in mind our target audience (ages 8-12):
+
+=== Language Design
+
+* Use simple, plain English
+* Avoid jargon and technical terms
+* Make error messages friendly and helpful
+* Never make kids feel bad for making mistakes
+
+=== Error Messages
+
+**Bad:** `SyntaxError: Unexpected token at line 5`
+
+**Good:** `Oops! Something doesn't look quite right on line 5. Did you forget to close a tag?`
+
+=== Examples
+
+* Use relatable scenarios (games, pets, stories)
+* Keep examples short and focused
+* Include lots of comments explaining what's happening
+* Test with actual children when possible
+
+=== Safety First
+
+* Never add network functionality
+* Never add file system access
+* Always sandbox code execution
+* Never collect any user data
+
+== Commit Guidelines
+
+* Conventional commits: `type(scope): description`
+* Sign all commits (DCO required)
+* Atomic, focused commits
+
+== Code Style
+
+* ReScript for application logic (per RSR Language Policy)
+* Deno for runtime (not Node/npm/bun per RSR)
+* Descriptive variable names
+* Extensive comments for educational clarity
+
+== Testing
+
+[source,bash]
+----
+# Run all tests
+just test
+
+# Run specific level examples
+just example-level1
+just example-level2
+just example-level3
+
+# Run game example
+just example-game
+----
+
+== Types of Contributions Needed
+
+=== For Programmers
+
+* Interpreter improvements
+* New language features (keeping it simple!)
+* Bug fixes
+* Web playground development
+
+=== For Educators
+
+* Curriculum development
+* Lesson plans
+* Activity sheets
+* Assessment ideas
+
+=== For Parents
+
+* Testing with your children
+* Feedback on usability
+* Documentation improvements
+* Translation to other languages
+
+=== For Artists
+
+* Cute mascot designs
+* Icons and graphics
+* Visual themes for the playground
+
+== License
+
+Contributions licensed under PMPL-1.0-or-later.

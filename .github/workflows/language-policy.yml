@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+name: Language Policy Enforcement
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions: read-all
+
+jobs:
+  check-banned-languages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Check for TypeScript files
+        run: |
+          ts_files=$(find . -name "*.ts" -not -name "*.d.ts" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null || true)
+          if [ -n "$ts_files" ]; then
+            echo "::error::TypeScript files detected (use ReScript instead):"
+            echo "$ts_files"
+            exit 1
+          fi
+          echo "No TypeScript files found"
+
+      - name: Check for Python files
+        run: |
+          py_files=$(find . -name "*.py" -not -path "./.git/*" 2>/dev/null | grep -v -E "(salt|pillar|grain|state|sls)" || true)
+          if [ -n "$py_files" ]; then
+            echo "::error::Python files detected (only allowed for SaltStack):"
+            echo "$py_files"
+            exit 1
+          fi
+          echo "No banned Python files found"
+
+      - name: Check for Go files
+        run: |
+          go_files=$(find . -name "*.go" -not -path "./.git/*" 2>/dev/null || true)
+          if [ -n "$go_files" ]; then
+            echo "::error::Go files detected (use Rust instead):"
+            echo "$go_files"
+            exit 1
+          fi
+          echo "No Go files found"
+
+      - name: Check for package.json
+        run: |
+          pkg_files=$(find . -name "package.json" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null || true)
+          if [ -n "$pkg_files" ]; then
+            echo "::error::package.json detected (use deno.json instead):"
+            echo "$pkg_files"
+            exit 1
+          fi
+          echo "No package.json found"
+
+      - name: Policy check passed
+        run: echo "All language policy checks passed"

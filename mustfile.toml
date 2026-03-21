@@ -1,0 +1,127 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# mustfile.toml - Configuration for Must
+# Task runner + template engine + enforcer
+# See: https://github.com/hyperpolymath/mustfile
+
+schema = "0.1"
+
+[project]
+name = "me-dialect-playground"
+version = "1.0.0"
+license = "PMPL-1.0-or-later"
+author = "Jonathan D.A. Jewell"
+description = "Playground for Me: A Programming Language for Young Creators"
+
+[variables]
+copyright = "Copyright (C) 2024-2025 Palimpsest Stewardship Council"
+license = "PMPL-1.0-or-later"
+registry = "ghcr.io/hyperpolymath"
+
+# Task definitions (delegate to just)
+[tasks]
+
+[tasks.build]
+description = "Build the project"
+commands = ["just build"]
+
+[tasks.test]
+description = "Run tests"
+commands = ["just test"]
+
+[tasks.lint]
+description = "Lint code"
+commands = ["just lint"]
+
+[tasks.fmt]
+description = "Format code"
+commands = ["just fmt"]
+
+[tasks.check]
+description = "Run all checks"
+commands = ["just check"]
+
+[tasks.clean]
+description = "Clean build artifacts"
+commands = ["just clean"]
+
+# Requirements enforcement - Physical State contract
+[requirements]
+must_have = [
+    "LICENSE",
+    "README.adoc",
+    "justfile",
+    "Mustfile",
+    "mustfile.toml",
+    "config.ncl",
+    "Justfile",
+    "ROADMAP.adoc",
+    "ARCHITECTURE.adoc",
+    ".bot-directive",
+    ".machine_readable",
+    ".machine_readable/6scm",
+    "contractiles",
+    "contractiles/dust",
+    "contractiles/dust/Dustfile",
+    "contractiles/lust",
+    "contractiles/lust/Lustfile",
+    "contractiles/must",
+    "contractiles/must/Mustfile",
+    "contractiles/trust",
+    "contractiles/trust/Trustfile",
+    ".bot-directive/README.scm",
+    ".bot-directive/echidnabot.scm",
+    ".bot-directive/finishbot.scm",
+    ".bot-directive/glambot.scm",
+    ".bot-directive/rhodibot.scm",
+    ".bot-directive/robot-repo-automaton.scm",
+    ".bot-directive/seambot.scm",
+    ".bot-directive/sustainabot.scm",
+]
+
+must_not_have = [
+    "Makefile",
+    "Dockerfile",
+    ".env",
+    "package-lock.json",
+    "tsconfig.json",
+]
+
+# Content requirements
+[requirements.content]
+"LICENSE" = [
+    "SPDX-License-Identifier: PMPL-1.0-or-later",
+]
+
+# Enforcement rules
+"README.adoc" = [
+    "Me: A Programming Language for Young Creators",
+]
+"Justfile" = [
+    "SPDX-License-Identifier:",
+]
+"ROADMAP.adoc" = [
+    "SPDX-License-Identifier: PMPL-1.0-or-later",
+    "Roadmap",
+]
+"ARCHITECTURE.adoc" = [
+    "SPDX-License-Identifier: PMPL-1.0-or-later",
+    "Architecture",
+]
+
+[enforcement]
+license = "PMPL-1.0-or-later"
+copyright_holder = "Palimpsest Stewardship Council"
+podman_not_docker = true
+gitlab_not_github = false
+
+[enforcement.checks]
+no_trailing_whitespace = true
+no_tabs = false
+unix_line_endings = true
+max_line_length = 120
+
+# Deployment configuration
+[deploy]
+containerfile = "Containerfile"
+registry = "ghcr.io/hyperpolymath"
+default_tag = "latest"

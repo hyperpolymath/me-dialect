@@ -1,0 +1,34 @@
+;; SPDX-License-Identifier: PMPL-1.0-or-later
+;; META.scm - Project metadata and architecture decisions
+
+(define project-meta
+  `((version . "1.0.0")
+    (name . "me-dialect-playground")
+    (architecture-decisions
+      ((adr-001
+         ((status . "accepted")
+          (date . "2025-12-30")
+          (context . "Need child-friendly programming language for ages 8-12")
+          (decision . "Use HTML-like syntax with descriptive tags for approachability")
+          (consequences . "Familiar syntax for web-aware kids, easy progressive learning")))
+       (adr-002
+         ((status . "accepted")
+          (date . "2025-12-30")
+          (title . "Hyperpolymath Language Policy")
+          (context . "Consistent language stack across all repositories")
+          (decision . "Use ReScript (not TypeScript), Deno (not npm/Node), Rust (not Go/Python)")
+          (consequences . ("Type safety via ReScript"
+                           "No npm dependencies"
+                           "Performance via Rust"
+                           "Python only for SaltStack"))))))
+    (development-practices
+      ((code-style . "rescript-standard")
+       (security . "openssf-scorecard")
+       (testing . "property-based")
+       (versioning . "semver")
+       (documentation . "asciidoc")
+       (branching . "trunk-based")))
+    (design-rationale
+      ((why-html-like . "Children recognize HTML-like structure from web")
+       (why-descriptive . "Tags like <remember> and <say> are self-explanatory")
+       (why-sandbox . "Safety-first approach for young learners")))))

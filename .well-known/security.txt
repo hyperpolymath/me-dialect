@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# RFC 9116 - Security.txt
+
+Contact: mailto:hyperpolymath@proton.me
+Contact: https://github.com/hyperpolymath/me-dialect-playground/security/advisories/new
+Expires: 2026-12-31T23:59:59.000Z
+Encryption: https://keys.openpgp.org/search?q=hyperpolymath@proton.me
+Preferred-Languages: en
+Canonical: https://github.com/hyperpolymath/me-dialect-playground/.well-known/security.txt
+Policy: https://github.com/hyperpolymath/me-dialect-playground/blob/main/SECURITY.md
+
+# Child Safety Note:
+# Me is designed for children ages 8-12. Any security vulnerability
+# that could affect child safety is treated with highest priority.

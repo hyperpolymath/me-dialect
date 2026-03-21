@@ -1,0 +1,55 @@
+;; SPDX-License-Identifier: PMPL-1.0-or-later
+;; STATE.scm - Current project state
+
+(state
+  (version . "1.0.0")
+  (phase . "initial")
+  (updated . "2025-12-30T20:00:00Z")
+
+  (project
+    (name . "me-dialect-playground")
+    (tier . "satellite")
+    (license . "AGPL-3.0-or-later")
+    (language . "typescript"))
+
+  (compliance
+    (rsr . #t)
+    (security-hardened . #t)
+    (ci-cd . #f)
+    (guix-primary . #f)
+    (nix-fallback . #f))
+
+  (current-position
+    ((overall-completion . 15)
+     (components
+       ((language-spec . 60)
+        (interpreter . 20)
+        (playground-ui . 0)
+        (curriculum . 0)
+        (examples . 30)))
+     (working-features
+       ("Basic interpreter"
+        "HTML-like syntax"
+        "Variable interpolation"
+        "Conditionals"
+        "Loops"))))
+
+  (milestones
+    (v0.1.0
+      (status . "in-progress")
+      (features
+        "Core interpreter"
+        "Basic examples"
+        "Level 1-3 curriculum"))
+    (v0.2.0
+      (status . "planned")
+      (features
+        "Web playground"
+        "Visual feedback"
+        "Drawing canvas"))
+    (v1.0.0
+      (status . "planned")
+      (features
+        "Full curriculum"
+        "Teacher resources"
+        "Parent guide"))))
