@@ -9,6 +9,7 @@
     "jsr:@std/internal@^1.0.12": "1.0.12",
     "jsr:@std/path@^1.1.4": "1.1.4",
     "jsr:@std/testing@1": "1.0.17",
+    "npm:@rescript/core@*": "1.6.1_rescript@12.1.0",
     "npm:@rescript/core@1": "1.6.1_rescript@12.1.0",
     "npm:@rescript/runtime@12": "12.1.0",
     "npm:rescript@*": "12.1.0"

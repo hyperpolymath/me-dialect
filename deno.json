@@ -9,7 +9,8 @@
     "lint": "deno lint",
     "fmt": "deno fmt",
     "demo": "deno run src/run.js",
-    "playground": "deno run --allow-net src/playground.js"
+    "playground": "deno run --allow-net src/playground.js",
+    "dump": "deno run --allow-read tools/ast_dump.js"
   },
   "imports": {
     "@std/": "jsr:@std/",
