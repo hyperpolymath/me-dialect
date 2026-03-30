@@ -14,6 +14,7 @@ let () = {
     ->Array.concat(MeTest_Conditionals.run())
     ->Array.concat(MeTest_Repetition.run())
     ->Array.concat(MeTest_EdgeCases.run())
+    ->Array.concat(MeTest_Parser.run())
 
   let exitCode = MeTestUtils.summarise(allResults)
 

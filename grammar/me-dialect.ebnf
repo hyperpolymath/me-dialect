@@ -1,0 +1,124 @@
+(* SPDX-License-Identifier: PMPL-1.0-or-later *)
+(* SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk> *)
+(*                                                                              *)
+(* Me-Dialect Formal Grammar (EBNF)                                             *)
+(*                                                                              *)
+(* An educational programming language for children ages 8-12.                  *)
+(* Uses XML/HTML-like syntax. This grammar describes the concrete syntax        *)
+(* that the MeParser module accepts.                                            *)
+(*                                                                              *)
+(* Notation:                                                                    *)
+(*   { ... }   zero or more repetitions                                         *)
+(*   [ ... ]   optional                                                         *)
+(*   ( ... )   grouping                                                         *)
+(*   |         alternation                                                      *)
+(*   "..."     terminal string                                                  *)
+(*   (* ... *) comment                                                          *)
+
+(* ========================================================================== *)
+(* Top-level                                                                    *)
+(* ========================================================================== *)
+
+program         = { ws } , { top_level_element , { ws } } ;
+
+top_level_element = comment | node ;
+
+comment         = "<!--" , { any_char - "-->" } , "-->" ;
+
+(* ========================================================================== *)
+(* Nodes                                                                        *)
+(* ========================================================================== *)
+
+node            = self_closing_node
+                | container_node
+                | content_node ;
+
+(* Tags that close themselves: <stop/> and <shape .../> *)
+self_closing_node = "<" , self_closing_tag , { ws , attribute } , { ws } , "/>" ;
+
+self_closing_tag  = "stop" | "shape" ;
+
+(* Tags that contain child nodes *)
+container_node  = container_open , { ws } , { child_element , { ws } } , container_close ;
+
+container_open  = "<" , container_tag , { ws , attribute } , ">" ;
+container_close = "</" , container_tag , ">" ;
+container_tag   = "choose" | "when" | "otherwise" | "repeat" | "canvas" ;
+
+child_element   = comment | node ;
+
+(* Tags that contain text content *)
+content_node    = content_open , text_content , content_close ;
+
+content_open    = "<" , content_tag , { ws , attribute } , ">" ;
+content_close   = "</" , content_tag , ">" ;
+content_tag     = "say" | "remember" | "ask" | "add" | "subtract" ;
+
+(* ========================================================================== *)
+(* Attributes                                                                   *)
+(* ========================================================================== *)
+
+attribute       = attr_name , [ "=" , attr_value ] ;
+
+attr_name       = name_start_char , { name_char } ;
+
+name_start_char = letter | "_" ;
+name_char       = letter | digit | "-" | "_" ;
+
+attr_value      = '"' , { attr_value_char } , '"'
+                | "'" , { attr_value_char } , "'" ;
+
+attr_value_char = any_char - ( '"' | "'" ) ;
+                  (* The quote character matching the opening delimiter *)
+                  (* is the only one disallowed inside the value.       *)
+
+(* ========================================================================== *)
+(* Text content                                                                 *)
+(* ========================================================================== *)
+
+text_content    = { text_char | interpolation } ;
+
+text_char       = any_char - ( "<" | "{" ) ;
+                  (* Text stops at the start of a child tag or interpolation *)
+
+interpolation   = "{" , var_name , "}" ;
+
+var_name        = name_start_char , { name_char } ;
+
+(* ========================================================================== *)
+(* Specific tag attribute patterns                                              *)
+(* ========================================================================== *)
+
+(* These are the attribute patterns each tag expects.                          *)
+(* The parser accepts any attributes; the interpreter checks semantics.        *)
+
+(* <say>text with {variables}</say>                                            *)
+(* <remember name="varName">value</remember>                                   *)
+(* <ask into="varName">prompt text</ask>                                       *)
+(* <add to="varName">amount</add>                                              *)
+(* <subtract from="varName">amount</subtract>                                  *)
+(* <repeat times="n">children</repeat>                                         *)
+(* <choose>when/otherwise children</choose>                                    *)
+(* <when varName-is="value">children</when>                                    *)
+(* <when varName-is-not="value">children</when>                                *)
+(* <otherwise>children</otherwise>                                             *)
+(* <canvas width="w" height="h">shape children</canvas>                        *)
+(* <shape type="t" prop="val" .../>                                            *)
+(* <stop/>                                                                     *)
+
+(* ========================================================================== *)
+(* Lexical primitives                                                           *)
+(* ========================================================================== *)
+
+ws              = " " | "\t" | "\n" | "\r" ;
+
+letter          = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i"
+                | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r"
+                | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+                | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I"
+                | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R"
+                | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" ;
+
+digit           = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+
+any_char        = ? any Unicode character ? ;
