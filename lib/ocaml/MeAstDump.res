@@ -84,7 +84,7 @@ let rec nodeToJsonObj = (node: MeLanguage.meNode): Dict.t<JSON.t> => {
 /// Uses 2-space indentation for readability.
 let toJson = (node: MeLanguage.meNode): string => {
   let obj = nodeToJsonObj(node)
-  JSON.stringifyAnyWithIndent(JSON.Encode.object(obj), 2)->Option.getOr("{}")
+  JSON.stringifyAny(JSON.Encode.object(obj), ~space=2)->Option.getOr("{}")
 }
 
 // ---------------------------------------------------------------------------

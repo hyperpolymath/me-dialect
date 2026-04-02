@@ -64,7 +64,7 @@ function nodeToJsonObj(node) {
 
 function toJson(node) {
   let obj = nodeToJsonObj(node);
-  return Core__Option.getOr(JSON.stringify(obj, null, 2), "{}");
+  return Core__Option.getOr(JSON.stringify(obj, undefined, 2), "{}");
 }
 
 function escapeString(s) {
