@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 //! Backend implementation for the Me-Dialect LSP server.
 //!
 //! Me-Dialect uses an XML/HTML-like syntax with tags such as `<say>`,

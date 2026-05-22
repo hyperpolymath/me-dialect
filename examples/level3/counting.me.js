@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 // Level 3: Counting and Repeating - Make the computer count!
 
 import { createMeEnvironment, execute } from '../../src/Main.res.js';

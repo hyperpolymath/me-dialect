@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 // Level 2: Making Choices - Teaching the computer to decide!
 
 import { createMeEnvironment, execute } from '../../src/Main.res.js';

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 //! me-dialect-lsp — Language Server Protocol server for Me-Dialect.
 //!
 //! Me is an educational programming language for children (ages 8-12) that

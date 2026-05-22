@@ -23,7 +23,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Sandboxed execution environment
 - No network access
 - No file system access
-- PMPL-1.0-or-later license
+- MPL-2.0 license
 
 ## [0.1.0] - 2025-12-30
 

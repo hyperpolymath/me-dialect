@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 = Contributing to Me Language
 
 Thank you for wanting to help make programming accessible to children!
@@ -119,4 +119,4 @@ just example-game
 
 == License
 
-Contributions licensed under PMPL-1.0-or-later.
+Contributions licensed under MPL-2.0.

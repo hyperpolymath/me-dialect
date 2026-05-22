@@ -2,7 +2,7 @@
 :toc: macro
 :icons: font
 
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 
 image:https://img.shields.io/badge/Ages-8--12-brightgreen[Ages 8-12]
 image:https://img.shields.io/badge/Language-Me-ff69b4[Me]
@@ -275,7 +275,7 @@ Coming soon:
 
 == License
 
-SPDX-License-Identifier: PMPL-1.0-or-later-or-later
+SPDX-License-Identifier: MPL-2.0-or-later
 
 == What's Next?
 

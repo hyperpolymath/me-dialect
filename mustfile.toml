@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 # mustfile.toml - Configuration for Must
 # Task runner + template engine + enforcer
 # See: https://github.com/hyperpolymath/mustfile
@@ -8,13 +8,13 @@ schema = "0.1"
 [project]
 name = "me-dialect-playground"
 version = "1.0.0"
-license = "PMPL-1.0-or-later"
+license = "MPL-2.0"
 author = "Jonathan D.A. Jewell"
 description = "Playground for Me: A Programming Language for Young Creators"
 
 [variables]
 copyright = "Copyright (C) 2024-2025 Palimpsest Stewardship Council"
-license = "PMPL-1.0-or-later"
+license = "MPL-2.0"
 registry = "ghcr.io/hyperpolymath"
 
 # Task definitions (delegate to just)
@@ -89,7 +89,7 @@ must_not_have = [
 # Content requirements
 [requirements.content]
 "LICENSE" = [
-    "SPDX-License-Identifier: PMPL-1.0-or-later",
+    "SPDX-License-Identifier: MPL-2.0",
 ]
 
 # Enforcement rules
@@ -100,16 +100,16 @@ must_not_have = [
     "SPDX-License-Identifier:",
 ]
 "ROADMAP.adoc" = [
-    "SPDX-License-Identifier: PMPL-1.0-or-later",
+    "SPDX-License-Identifier: MPL-2.0",
     "Roadmap",
 ]
 "ARCHITECTURE.adoc" = [
-    "SPDX-License-Identifier: PMPL-1.0-or-later",
+    "SPDX-License-Identifier: MPL-2.0",
     "Architecture",
 ]
 
 [enforcement]
-license = "PMPL-1.0-or-later"
+license = "MPL-2.0"
 copyright_holder = "Palimpsest Stewardship Council"
 podman_not_docker = true
 gitlab_not_github = false

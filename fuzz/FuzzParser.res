@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 // Fuzz target for the Me-Dialect string-processing functions.
 //
 // Me-Dialect uses an AST-based interpreter (no separate lexer/parser

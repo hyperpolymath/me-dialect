@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 # me-dialect-lsp — Language Server Protocol implementation for Me-Dialect.
 #
 # Me is an educational programming language for children (ages 8-12) that
@@ -10,7 +10,7 @@
 name = "me-dialect-lsp"
 version = "0.1.0"
 edition = "2021"
-license = "PMPL-1.0-or-later"
+license = "MPL-2.0"
 description = "LSP server for the Me-Dialect children's programming language"
 repository = "https://github.com/hyperpolymath/nextgen-languages"
 authors = ["Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>"]

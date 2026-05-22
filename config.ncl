@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 # config.ncl - Me: A Programming Language for Young Creators Configuration
 # Type-safe configuration using Nickel
 # See: https://nickel-lang.org
@@ -9,7 +9,7 @@
     name = "me-dialect-playground",
     version = "1.0.0",
     description = "Playground for Me: A Programming Language for Young Creators",
-    license = "PMPL-1.0-or-later",
+    license = "MPL-2.0",
     author = "Jonathan D.A. Jewell",
     repository = "https://github.com/hyperpolymath/me-dialect-playground",
   },
