@@ -1,13 +1,16 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 = Me: A Programming Language for Young Creators
+image:https://img.shields.io/badge/OpenSSF-Best_Practices-green?logo=openssourcesecurity[OpenSSF Best Practices,link="https://www.bestpractices.dev/en/projects/new?repo_url=https://github.com/hyperpolymath/me-dialect"]
+
 :toc: macro
 :icons: font
 
-// SPDX-License-Identifier: MPL-2.0
 
 image:https://img.shields.io/badge/Ages-8--12-brightgreen[Ages 8-12]
 image:https://img.shields.io/badge/Language-Me-ff69b4[Me]
 image:https://img.shields.io/badge/Style-HTML--like-orange[HTML-like]
-image:https://img.shields.io/badge/License-PMPL--1.0-blue.svg[License: PMPL-1.0,link="https://github.com/hyperpolymath/palimpsest-license"]
+image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[License: MPL-2.0,link="https://opensource.org/licenses/MPL-2.0"]
 
 *A friendly programming language for children aged 8-12*
 
@@ -275,7 +278,9 @@ Coming soon:
 
 == License
 
-SPDX-License-Identifier: MPL-2.0-or-later
+This project is licensed under the Mozilla Public License, v. 2.0. See the `LICENSE` file for details.
+
+SPDX-License-Identifier: MPL-2.0
 
 == What's Next?
 
