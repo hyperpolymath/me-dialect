@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 // Level 1: Hello World - Your first Me program!
 
 import { createMeEnvironment, execute } from '../../src/Main.res.js';

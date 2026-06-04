@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 // Level 2: Making Choices - Teaching the computer to decide!
 
 import { createMeEnvironment, execute } from '../../src/Main.res.js';

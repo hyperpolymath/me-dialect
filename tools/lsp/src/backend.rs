@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 //! Backend implementation for the Me-Dialect LSP server.
 //!
 //! Me-Dialect uses an XML/HTML-like syntax with tags such as `<say>`,
