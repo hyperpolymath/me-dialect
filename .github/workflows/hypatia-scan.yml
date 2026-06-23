@@ -1,14 +1,16 @@
 # SPDX-License-Identifier: MPL-2.0
-# Hypatia Neurosymbolic CI/CD Security Scan
+# Thin wrapper around hyperpolymath/standards hypatia-scan-reusable.yml.
+# See standards#191 for the reusable's purpose and design.
+
 name: Hypatia Security Scan
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [main, master, develop]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
   schedule:
-    - cron: '0 0 * * 0'  # Weekly on Sunday
+    - cron: '0 0 * * 0'
   workflow_dispatch:
 
 permissions: read-all
@@ -100,80 +102,12 @@ jobs:
           # Cleanup
           rm -rf "$FLEET_DIR"
 
-          echo "✅ Finding submission complete"
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: write
 
-      - name: Check for critical issues
-        if: steps.scan.outputs.critical > 0
-        run: |
-          echo "⚠️  Critical security issues found!"
-          echo "Review hypatia-findings.json for details"
-          # Don't fail the build yet - just warn
-          # exit 1
-
-      - name: Generate scan report
-        run: |
-          cat << EOF > hypatia-report.md
-          # Hypatia Security Scan Report
-
-          **Repository:** ${{ github.repository }}
-          **Scan Date:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          **Commit:** ${{ github.sha }}
-
-          ## Summary
-
-          | Severity | Count |
-          |----------|-------|
-          | Critical | ${{ steps.scan.outputs.critical }} |
-          | High     | ${{ steps.scan.outputs.high }} |
-          | Medium   | ${{ steps.scan.outputs.medium }} |
-          | **Total**| ${{ steps.scan.outputs.findings_count }} |
-
-          ## Next Steps
-
-          1. Review findings in the artifact: hypatia-findings.json
-          2. Auto-fixable issues will be addressed by robot-repo-automaton (Phase 3)
-          3. Manual review required for complex issues
-
-          ## Learning
-
-          These findings feed Hypatia's learning engine to improve future rules.
-
-          ---
-          *Powered by [Hypatia](https://github.com/hyperpolymath/hypatia) - Neurosymbolic CI/CD Intelligence*
-          EOF
-
-          cat hypatia-report.md >> $GITHUB_STEP_SUMMARY
-
-      - name: Comment on PR with findings
-        if: github.event_name == 'pull_request' && steps.scan.outputs.findings_count > 0
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
-        with:
-          script: |
-            const fs = require('fs');
-            const findings = JSON.parse(fs.readFileSync('hypatia-findings.json', 'utf8'));
-
-            const critical = findings.filter(f => f.severity === 'critical').length;
-            const high = findings.filter(f => f.severity === 'high').length;
-
-            let comment = `## 🔍 Hypatia Security Scan\n\n`;
-            comment += `**Findings:** ${findings.length} issues detected\n\n`;
-            comment += `| Severity | Count |\n|----------|-------|\n`;
-            comment += `| 🔴 Critical | ${critical} |\n`;
-            comment += `| 🟠 High | ${high} |\n`;
-            comment += `| 🟡 Medium | ${findings.length - critical - high} |\n\n`;
-
-            if (critical > 0) {
-              comment += `⚠️ **Action Required:** Critical security issues found!\n\n`;
-            }
-
-            comment += `<details><summary>View findings</summary>\n\n`;
-            comment += `\`\`\`json\n${JSON.stringify(findings.slice(0, 10), null, 2)}\n\`\`\`\n`;
-            comment += `</details>\n\n`;
-            comment += `*Powered by Hypatia Neurosymbolic CI/CD Intelligence*`;
-
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: comment
-            });
+jobs:
+  hypatia:
+    uses: hyperpolymath/standards/.github/workflows/hypatia-scan-reusable.yml@97df762107501909f50bb770e9bc200b6c415600
+    secrets: inherit
