@@ -13,10 +13,94 @@ on:
     - cron: '0 0 * * 0'
   workflow_dispatch:
 
-# Estate guardrail: cancel superseded runs so re-pushes don't pile up.
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+permissions: read-all
+
+jobs:
+  scan:
+    name: Hypatia Neurosymbolic Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0  # Full history for better pattern analysis
+
+      - name: Setup Elixir for Hypatia scanner
+        uses: erlef/setup-beam@2f0cc07b4b9bea248ae098aba9e1a8a1de5ec24c # v1.18.2
+        with:
+          elixir-version: '1.19.4'
+          otp-version: '28.3'
+
+      - name: Clone Hypatia
+        run: |
+          if [ ! -d "$HOME/hypatia" ]; then
+            git clone https://github.com/hyperpolymath/hypatia.git "$HOME/hypatia"
+          fi
+
+      - name: Build Hypatia scanner (if needed)
+        working-directory: ${{ env.HOME }}/hypatia
+        run: |
+          if [ ! -f hypatia-v2 ]; then
+            echo "Building hypatia-v2 scanner..."
+            mix deps.get
+            mix escript.build
+            mv hypatia hypatia-v2
+          fi
+
+      - name: Run Hypatia scan
+        id: scan
+        run: |
+          echo "Scanning repository: ${{ github.repository }}"
+
+          # Run scanner
+          HYPATIA_FORMAT=json "$HOME/hypatia/hypatia-cli.sh" scan . > hypatia-findings.json
+
+          # Count findings
+          FINDING_COUNT=$(jq '. | length' hypatia-findings.json 2>/dev/null || echo 0)
+          echo "findings_count=$FINDING_COUNT" >> $GITHUB_OUTPUT
+
+          # Extract severity counts
+          CRITICAL=$(jq '[.[] | select(.severity == "critical")] | length' hypatia-findings.json)
+          HIGH=$(jq '[.[] | select(.severity == "high")] | length' hypatia-findings.json)
+          MEDIUM=$(jq '[.[] | select(.severity == "medium")] | length' hypatia-findings.json)
+
+          echo "critical=$CRITICAL" >> $GITHUB_OUTPUT
+          echo "high=$HIGH" >> $GITHUB_OUTPUT
+          echo "medium=$MEDIUM" >> $GITHUB_OUTPUT
+
+          echo "## Hypatia Scan Results" >> $GITHUB_STEP_SUMMARY
+          echo "- Total findings: $FINDING_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "- Critical: $CRITICAL" >> $GITHUB_STEP_SUMMARY
+          echo "- High: $HIGH" >> $GITHUB_STEP_SUMMARY
+          echo "- Medium: $MEDIUM" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload findings artifact
+        uses: actions/upload-artifact@65c79d7f54e76e4e3c7a8f34db0f4ac8b515c478 # v4
+        with:
+          name: hypatia-findings
+          path: hypatia-findings.json
+          retention-days: 90
+
+      - name: Submit findings to gitbot-fleet (Phase 2)
+        if: steps.scan.outputs.findings_count > 0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          echo "📤 Submitting ${{ steps.scan.outputs.findings_count }} findings to gitbot-fleet..."
+
+          # Clone gitbot-fleet to temp directory
+          FLEET_DIR="/tmp/gitbot-fleet-$$"
+          git clone https://github.com/hyperpolymath/gitbot-fleet.git "$FLEET_DIR"
+
+          # Run submission script
+          bash "$FLEET_DIR/scripts/submit-finding.sh" hypatia-findings.json
+
+          # Cleanup
+          rm -rf "$FLEET_DIR"
 
 permissions:
   contents: read

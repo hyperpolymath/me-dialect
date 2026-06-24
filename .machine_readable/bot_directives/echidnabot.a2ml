@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# Converted from .scm format
+
+# SPDX-License-Identifier: PMPL-1.0-or-later
+
+[bot-directive]
+allow = ["analysis", "fuzzing", "proof checks"]
+bot = "echidnabot"
+deny = ["write to core modules", "write to bindings"]
+notes = "May open findings; code changes require explicit approval"
+scope = "formal verification and fuzzing"
+
+

@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# Converted from .scm format
+
+# SPDX-License-Identifier: PMPL-1.0-or-later
+
+[bot-directive]
+allow = ["release checklists", "docs updates", "metadata fixes"]
+bot = "finishbot"
+deny = ["code changes without approval"]
+notes = "Focus on polish, licensing, and packaging"
+scope = "release readiness"
+
+

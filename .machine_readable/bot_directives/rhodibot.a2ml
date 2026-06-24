@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# Converted from .scm format
+
+# SPDX-License-Identifier: PMPL-1.0-or-later
+
+[bot-directive]
+allow = ["metadata", "docs", "repo-structure checks"]
+bot = "rhodibot"
+deny = ["destructive edits without approval"]
+notes = "Auto-fix allowed only for formatting in docs and metadata"
+scope = "rsr-compliance"
+
+

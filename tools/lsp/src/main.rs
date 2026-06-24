@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 //! me-dialect-lsp — Language Server Protocol server for Me-Dialect.
 //!
 //! Me is an educational programming language for children (ages 8-12) that
