@@ -1,0 +1,278 @@
+<!--
+SPDX-License-Identifier: CC-BY-SA-4.0
+SPDX-FileCopyrightText: 2025-2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+-->
+
+![Ages 8-12](https://img.shields.io/badge/Ages-8--12-brightgreen)
+![Me](https://img.shields.io/badge/Language-Me-ff69b4)
+![HTML-like](https://img.shields.io/badge/Style-HTML--like-orange)
+[![License: MPL-2.0](https://img.shields.io/badge/License-MPL_2.0-blue.svg)](https://opensource.org/licenses/MPL-2.0)
+
+**A friendly programming language for children aged 8-12**
+
+<div id="toc">
+
+</div>
+
+# What is Me?
+
+Me is a programming language designed specifically for young learners
+(ages 8-12). It uses a familiar HTML-like syntax that feels like
+building a webpage, making programming approachable and fun!
+
+> "Programming should feel like playing with building blocks, not
+> solving puzzles."
+
+# Why Me?
+
+## Designed for Young Minds
+
+- **Familiar syntax**: Looks like the HTML kids see on websites
+
+- **Visual feedback**: See your code come to life instantly
+
+- **Safe sandbox**: Can’t break anything - experiment freely!
+
+- **Progressive learning**: Start simple, discover more as you grow
+
+## Not Like Other Languages
+
+| Other Languages | Me Language | Why It Matters |
+|----|----|----|
+| `print("Hello")` | `<say>Hello!</say>` | Feels like writing a note |
+| `x` `=` `5` | `<remember` `name="score">5</remember>` | Describes what it does |
+| `if` `x` `>` `10:` | `<when` `score-is="big">…</when>` | Plain English conditions |
+| `for` `i` `in` `range(5):` | `<repeat` `times="5">…</repeat>` | Says exactly what happens |
+
+# Quick Start
+
+## Your First Program
+
+```me
+<me>
+  <say>Hello! I'm learning to code!</say>
+</me>
+```
+
+Output: `Hello!` `I’m` `learning` `to` `code!`
+
+## Remembering Things
+
+```me
+<me>
+  <remember name="my-name">Alex</remember>
+  <remember name="my-age">10</remember>
+
+  <say>My name is {my-name} and I am {my-age} years old!</say>
+</me>
+```
+
+## Making Choices
+
+```me
+<me>
+  <remember name="weather">sunny</remember>
+
+  <choose>
+    <when weather-is="sunny">
+      <say>Let's go outside!</say>
+    </when>
+    <when weather-is="rainy">
+      <say>Let's read a book!</say>
+    </when>
+    <otherwise>
+      <say>What's the weather like?</say>
+    </otherwise>
+  </choose>
+</me>
+```
+
+## Repeating Things
+
+```me
+<me>
+  <repeat times="3">
+    <say>Hip hip hooray!</say>
+  </repeat>
+</me>
+```
+
+Output: ---- Hip hip hooray! Hip hip hooray! Hip hip hooray! ----
+
+## Drawing Pictures
+
+```me
+<me>
+  <canvas width="200" height="200">
+    <circle x="100" y="100" size="50" color="yellow"/>
+    <circle x="80" y="80" size="10" color="black"/>
+    <circle x="120" y="80" size="10" color="black"/>
+    <curve from="70,120" to="130,120" bend="down" color="black"/>
+  </canvas>
+  <say>I drew a smiley face!</say>
+</me>
+```
+
+## Asking Questions
+
+```me
+<me>
+  <ask into="favorite-color">What is your favorite color?</ask>
+  <say>Wow, {favorite-color} is a great color!</say>
+</me>
+```
+
+# Learning Path
+
+## Level 1: Hello World (Week 1-2)
+
+- `<say>` - Make the computer talk
+
+- `<remember>` - Store information
+
+- `<ask>` - Get input from users
+
+## Level 2: Making Choices (Week 3-4)
+
+- `<choose>` and `<when>` - Make decisions
+
+- `<otherwise>` - Handle other cases
+
+- Comparing things: `is`, `is-not`, `is-bigger`, `is-smaller`
+
+## Level 3: Repeating (Week 5-6)
+
+- `<repeat` `times="N">` - Do something N times
+
+- `<repeat` `for-each="item"` `in="list">` - Go through a list
+
+- `<repeat` `while="condition">` - Keep going until done
+
+## Level 4: Drawing (Week 7-8)
+
+- `<canvas>` - Create a drawing area
+
+- Shapes: `<circle>`, `<square>`, `<line>`, `<curve>`
+
+- Colors and sizes
+
+## Level 5: Games! (Week 9+)
+
+- `<on-click>` - React to mouse clicks
+
+- `<on-key>` - React to keyboard
+
+- `<move>` - Animate things
+
+- `<score>` - Keep track of points
+
+# Example Projects
+
+## Counting Game
+
+```me
+<me>
+  <remember name="score">0</remember>
+
+  <repeat times="5">
+    <ask into="answer">What is {random 1 to 10} + {random 1 to 10}?</ask>
+    <when answer-is="correct">
+      <add to="score">1</add>
+      <say>Correct!</say>
+    </when>
+    <otherwise>
+      <say>Not quite, try again next time!</say>
+    </otherwise>
+  </repeat>
+
+  <say>You got {score} out of 5!</say>
+</me>
+```
+
+## Pet Simulator
+
+```me
+<me>
+  <remember name="pet-name">Fluffy</remember>
+  <remember name="happiness">50</remember>
+  <remember name="hunger">50</remember>
+
+  <say>Welcome! Your pet's name is {pet-name}!</say>
+
+  <repeat forever="true">
+    <ask into="action">What do you want to do? (feed, play, or bye)</ask>
+
+    <choose>
+      <when action-is="feed">
+        <subtract from="hunger">20</subtract>
+        <say>{pet-name} says: Yum yum!</say>
+      </when>
+      <when action-is="play">
+        <add to="happiness">20</add>
+        <say>{pet-name} is so happy!</say>
+      </when>
+      <when action-is="bye">
+        <say>Goodbye! {pet-name} will miss you!</say>
+        <stop/>
+      </when>
+    </choose>
+  </repeat>
+</me>
+```
+
+# Project Structure
+
+    me-dialect-playground/
+    ├── src/                 # Me language implementation
+    ├── examples/            # Example programs for kids
+    │   ├── level1/         # Beginner examples
+    │   ├── level2/         # Making choices
+    │   ├── level3/         # Loops and repetition
+    │   ├── level4/         # Drawing
+    │   └── games/          # Fun game projects
+    ├── docs/               # Documentation and tutorials
+    ├── test/               # Test suite
+    ├── playground/         # Web-based playground (coming soon!)
+    └── curriculum/         # Teaching materials for educators
+
+# For Parents and Teachers
+
+Me is designed with safety and education in mind:
+
+- **No internet access**: Programs run in a safe sandbox
+
+- **No file access**: Cannot read or write to the computer
+
+- **Immediate feedback**: Kids see results instantly
+
+- **Encouraging errors**: Error messages are friendly and helpful
+
+- **Progressive complexity**: Reveals features as kids are ready
+
+## Curriculum Resources
+
+Coming soon: \* Lesson plans for 8-week courses \* Printable activity
+sheets \* Assessment rubrics \* Parent guides
+
+# Installation
+
+```bash
+# Coming soon!
+# For now, use the web playground at: (URL TBD)
+```
+
+# License
+
+This project is licensed under the Mozilla Public License, v. 2.0. See
+the `LICENSE` file for details.
+
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+# What’s Next?
+
+When you’re ready for more (around age 13+), check out **Solo** - the
+next step in your programming journey!
+
+------------------------------------------------------------------------
+
+**Made with love for young creators everywhere**
