@@ -1,123 +1,109 @@
-// SPDX-License-Identifier: CC-BY-SA-4.0
-// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-= Contributing to Me Language
+== Clone the repository
 
-Thank you for wanting to help make programming accessible to children!
+git clone https://github.com/hyperpolymath/me-dialect-playground.git cd
+me-dialect-playground
 
-== Getting Started
+== Using Nix (recommended for reproducibility)
 
-1. Fork the repository
-2. Create a feature branch from `main`
-3. Sign off commits (`git commit -s`)
-4. Submit a pull request
+nix develop
 
-== Development Setup
+== Or using toolbox/distrobox
 
-[source,bash]
-----
-# Clone and enter directory
-git clone https://github.com/hyperpolymath/me-dialect-playground.git
-cd me-dialect-playground
+toolbox create me-dialect-playground-dev toolbox enter
+me-dialect-playground-dev # Install dependencies manually
 
-# Install dependencies (Deno required per RSR)
-deno task dev
+== Verify setup
 
-# Run tests
-just test
+just check # or: cargo check / mix compile / etc. just test # Run test
+suite
 
-# Run the demo
-just demo
-----
+....
 
-== Guidelines for Child-Friendly Development
+### Repository Structure
+....
 
-When contributing to Me, please keep in mind our target audience (ages 8-12):
+me-dialect-playground/ ├── src/ # Source code (Perimeter 1-2) ├── lib/ #
+Library code (Perimeter 1-2) ├── extensions/ # Extensions (Perimeter 2)
+├── plugins/ # Plugins (Perimeter 2) ├── tools/ # Tooling (Perimeter 2)
+├── docs/ # Documentation (Perimeter 3) │ ├── architecture/ # ADRs,
+specs (Perimeter 2) │ └── proposals/ # RFCs (Perimeter 3) ├── examples/
+# Examples (Perimeter 3) ├── spec/ # Spec tests (Perimeter 3) ├── tests/
+# Test suite (Perimeter 2-3) ├── .well-known/ # Protocol files
+(Perimeter 1-3) ├── .github/ # GitHub config (Perimeter 1) │ ├──
+ISSUE_TEMPLATE/ │ └── workflows/ ├── CHANGELOG.md ├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md # This file ├── GOVERNANCE.md ├── LICENSE ├──
+MAINTAINERS.md ├── README.adoc ├── SECURITY.md ├── flake.nix # Nix flake
+(Perimeter 1) └── justfile # Task runner (Perimeter 1)
 
-=== Language Design
+....
 
-* Use simple, plain English
-* Avoid jargon and technical terms
-* Make error messages friendly and helpful
-* Never make kids feel bad for making mistakes
+---
 
-=== Error Messages
+## How to Contribute
 
-**Bad:** `SyntaxError: Unexpected token at line 5`
+### Reporting Bugs
 
-**Good:** `Oops! Something doesn't look quite right on line 5. Did you forget to close a tag?`
+**Before reporting**:
+1. Search existing issues
+2. Check if it's already fixed in `main`
+3. Determine which perimeter the bug affects
 
-=== Examples
+**When reporting**:
 
-* Use relatable scenarios (games, pets, stories)
-* Keep examples short and focused
-* Include lots of comments explaining what's happening
-* Test with actual children when possible
+Use the [bug report template](.github/ISSUE_TEMPLATE/bug_report.md) and include:
 
-=== Safety First
+- Clear, descriptive title
+- Environment details (OS, versions, toolchain)
+- Steps to reproduce
+- Expected vs actual behaviour
+- Logs, screenshots, or minimal reproduction
 
-* Never add network functionality
-* Never add file system access
-* Always sandbox code execution
-* Never collect any user data
+### Suggesting Features
 
-== Commit Guidelines
+**Before suggesting**:
+1. Check the [roadmap](ROADMAP.md) if available
+2. Search existing issues and discussions
+3. Consider which perimeter the feature belongs to
 
-* Conventional commits: `type(scope): description`
-* Sign all commits (DCO required)
-* Atomic, focused commits
+**When suggesting**:
 
-== Code Style
+Use the [feature request template](.github/ISSUE_TEMPLATE/feature_request.md) and include:
 
-* ReScript for application logic (per RSR Language Policy)
-* Deno for runtime (not Node/npm/bun per RSR)
-* Descriptive variable names
-* Extensive comments for educational clarity
+- Problem statement (what pain point does this solve?)
+- Proposed solution
+- Alternatives considered
+- Which perimeter this affects
 
-== Testing
+### Your First Contribution
 
-[source,bash]
-----
-# Run all tests
-just test
+Look for issues labelled:
 
-# Run specific level examples
-just example-level1
-just example-level2
-just example-level3
+- [`good first issue`](https://github.com/hyperpolymath/me-dialect-playground/labels/good%20first%20issue) — Simple Perimeter 3 tasks
+- [`help wanted`](https://github.com/hyperpolymath/me-dialect-playground/labels/help%20wanted) — Community help needed
+- [`documentation`](https://github.com/hyperpolymath/me-dialect-playground/labels/documentation) — Docs improvements
+- [`perimeter-3`](https://github.com/hyperpolymath/me-dialect-playground/labels/perimeter-3) — Community sandbox scope
 
-# Run game example
-just example-game
-----
+---
 
-== Types of Contributions Needed
+## Development Workflow
 
-=== For Programmers
+### Branch Naming
+....
 
-* Interpreter improvements
-* New language features (keeping it simple!)
-* Bug fixes
-* Web playground development
+docs/short-description # Documentation (P3) test/what-added # Test
+additions (P3) feat/short-description # New features (P2)
+fix/issue-number-description # Bug fixes (P2) refactor/what-changed #
+Code improvements (P2) security/what-fixed # Security fixes (P1-2)
 
-=== For Educators
+....
 
-* Curriculum development
-* Lesson plans
-* Activity sheets
-* Assessment ideas
+### Commit Messages
 
-=== For Parents
+We follow [Conventional Commits](https://www.conventionalcommits.org/):
+....
 
-* Testing with your children
-* Feedback on usability
-* Documentation improvements
-* Translation to other languages
+():
 
-=== For Artists
+{empty}[optional body]
 
-* Cute mascot designs
-* Icons and graphics
-* Visual themes for the playground
-
-== License
-
-Contributions licensed under MPL-2.0.
+{empty}[optional footer]
