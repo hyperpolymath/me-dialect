@@ -48,9 +48,10 @@ jobs:
 
       - name: Check for package.json
         run: |
-          pkg_files=$(find . -name "package.json" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null || true)
+          # Canonical JS policy (Bun first): package.json is allowed beside bun.lock.
+          pkg_files=$(find . -name "package.json" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null | while read -r f; do [ -f "$(dirname "$f")/bun.lock" ] || echo "$f"; done || true)
           if [ -n "$pkg_files" ]; then
-            echo "::error::package.json detected (use deno.json instead):"
+            echo "::error::package.json without bun.lock detected (Bun first per LANGUAGE-POLICY):"
             echo "$pkg_files"
             exit 1
           fi
