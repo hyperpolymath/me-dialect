@@ -2,3 +2,31 @@
 # Prettier must not reformat them.
 package.json
 pnpm-lock.yaml
+# Files without a Prettier baseline (not yet formatted); remove entries as they are formatted.
+.github/CONTRIBUTING.md
+.github/label-classifier.json
+.github/workflows/codeql.yml
+.github/workflows/hypatia-scan.yml
+.github/workflows/labels.yml
+.github/workflows/push-email-notify.yml
+.github/workflows/quality.yml
+.github/workflows/scorecard.yml
+examples/level1/hello.me.js
+examples/level2/choices.me.js
+examples/level3/counting.me.js
+src/Main.res.js
+src/MeAstDump.res.js
+src/MeLanguage.res.js
+src/MeParser.res.js
+src/run.js
+test/me_test.js
+test/MeTest_ASTConstruction.res.js
+test/MeTest_Conditionals.res.js
+test/MeTest_EdgeCases.res.js
+test/MeTest_Execution.res.js
+test/MeTest_Parser.res.js
+test/MeTest_Repetition.res.js
+test/MeTest_ValueAndInterpolation.res.js
+test/MeTestRunner.res.js
+test/MeTestUtils.res.js
+tools/ast_dump.js

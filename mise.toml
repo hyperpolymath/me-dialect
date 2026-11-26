@@ -32,7 +32,25 @@ gnu-grep = "latest"
 # Task runner alias
 [alias]
 task = "go-task"
-build = "cargo build --release"
-test = "cargo test"
-lint = "bun install --frozen-lockfile && bunx --no-install --bun prettier --check ."
-fmt = "bun install --frozen-lockfile && bunx --no-install --bun prettier --write ."
+
+[tasks.build]
+run = "cargo build --release"
+dir = "compiler/me-wasm"
+
+[tasks.test]
+run = "cargo test"
+dir = "compiler/me-wasm"
+
+[tasks."build:lsp"]
+run = "cargo build --release"
+dir = "tools/lsp"
+
+[tasks."test:lsp"]
+run = "cargo test"
+dir = "tools/lsp"
+
+[tasks.lint]
+run = "bun install --frozen-lockfile && bunx --no-install --bun prettier --check ."
+
+[tasks.fmt]
+run = "bun install --frozen-lockfile && bunx --no-install --bun prettier --write ."
