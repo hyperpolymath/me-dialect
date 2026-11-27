@@ -3,7 +3,6 @@
 rust = "latest"
 zig = "latest"
 bun = "latest"
-denojs = "latest"
 
 # Package managers
 pnpm = "latest"
@@ -34,12 +33,10 @@ gnu-grep = "latest"
 task = "go-task"
 
 [tasks.build]
-run = "cargo build --release"
-dir = "compiler/me-wasm"
+run = "just build"
 
 [tasks.test]
-run = "cargo test"
-dir = "compiler/me-wasm"
+run = "just test"
 
 [tasks."build:lsp"]
 run = "cargo build --release"
