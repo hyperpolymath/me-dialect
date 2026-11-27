@@ -48,13 +48,26 @@ jobs:
 
       - name: Check for package.json
         run: |
-          pkg_files=$(find . -name "package.json" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null || true)
+          # Canonical JS policy (Bun first): package.json is allowed beside bun.lock.
+          pkg_files=$(find . -name "package.json" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null | while read -r f; do [ -f "$(dirname "$f")/bun.lock" ] || echo "$f"; done || true)
           if [ -n "$pkg_files" ]; then
-            echo "::error::package.json detected (use deno.json instead):"
+            echo "::error::package.json without bun.lock detected (Bun first per LANGUAGE-POLICY):"
             echo "$pkg_files"
             exit 1
           fi
-          echo "No package.json found"
+          # Accepted manifests must not declare banned toolchains (TypeScript, Node/Deno, other package managers, JS test/lint stacks).
+          banned='^(typescript|ts-node|tsx|ts-jest|@types/.*|deno|node|npm|yarn|pnpm|eslint|jest|vitest|mocha|webpack|babel-core|@babel/core)$'
+          bad=0
+          while IFS= read -r f; do
+            hits=$(jq -r '[.dependencies, .devDependencies, .optionalDependencies, .peerDependencies] | map(select(. != null) | keys[]) | .[]' "$f" | grep -E "$banned" || true)
+            if [ -n "$hits" ]; then
+              echo "::error file=$f::banned toolchain declared in package.json:"
+              echo "$hits"
+              bad=1
+            fi
+          done < <(find . -name "package.json" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null)
+          [ "$bad" -eq 0 ] || exit 1
+          echo "package.json policy check passed"
 
       - name: Policy check passed
         run: echo "All language policy checks passed"
