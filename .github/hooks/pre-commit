@@ -24,7 +24,7 @@ for file in $STAGED_FILES; do
     # TypeScript files (banned - use ReScript)
     if [[ "$file" =~ \.tsx?$ ]] && [[ ! "$file" =~ \.d\.ts$ ]]; then
         echo -e "${RED}BLOCKED: TypeScript file detected: $file${NC}"
-        echo "  → Use ReScript (.res) instead of TypeScript"
+        echo "  → Use AffineScript (.affine) instead of TypeScript"
         VIOLATIONS=$((VIOLATIONS + 1))
     fi
 
@@ -33,7 +33,7 @@ for file in $STAGED_FILES; do
         # Allow only SaltStack-related Python
         if [[ ! "$file" =~ (salt|pillar|grain|state|sls) ]]; then
             echo -e "${RED}BLOCKED: Python file detected: $file${NC}"
-            echo "  → Python is only allowed for SaltStack. Use ReScript/Rust instead."
+            echo "  → Python is only allowed for SaltStack. Use AffineScript/Rust instead."
             VIOLATIONS=$((VIOLATIONS + 1))
         fi
     fi
