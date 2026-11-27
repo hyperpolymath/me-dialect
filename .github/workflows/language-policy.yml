@@ -58,14 +58,14 @@ jobs:
           # Accepted manifests must not declare banned toolchains (TypeScript, Node/Deno, other package managers, JS test/lint stacks).
           banned='^(typescript|ts-node|tsx|ts-jest|@types/.*|deno|node|npm|yarn|pnpm|eslint|jest|vitest|mocha|webpack|babel-core|@babel/core)$'
           bad=0
-          for f in $(find . -name "package.json" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null); do
+          while IFS= read -r f; do
             hits=$(jq -r '[.dependencies, .devDependencies, .optionalDependencies, .peerDependencies] | map(select(. != null) | keys[]) | .[]' "$f" | grep -E "$banned" || true)
             if [ -n "$hits" ]; then
               echo "::error file=$f::banned toolchain declared in package.json:"
               echo "$hits"
               bad=1
             fi
-          done
+          done < <(find . -name "package.json" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null)
           [ "$bad" -eq 0 ] || exit 1
           echo "package.json policy check passed"
 
