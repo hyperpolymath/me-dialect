@@ -20,7 +20,7 @@ jobs:
         run: |
           ts_files=$(find . -name "*.ts" -not -name "*.d.ts" -not -path "./.git/*" -not -path "./node_modules/*" 2>/dev/null || true)
           if [ -n "$ts_files" ]; then
-            echo "::error::TypeScript files detected (use ReScript instead):"
+            echo "::error::TypeScript files detected (use AffineScript instead):"
             echo "$ts_files"
             exit 1
           fi

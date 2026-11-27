@@ -16,8 +16,8 @@
           (date . "2025-12-30")
           (title . "Hyperpolymath Language Policy")
           (context . "Consistent language stack across all repositories")
-          (decision . "Use ReScript (not TypeScript), Deno (not npm/Node), Rust (not Go/Python)")
-          (consequences . ("Type safety via ReScript"
+          (decision . "Use AffineScript (not TypeScript), Deno (not npm/Node), Rust (not Go/Python)")
+          (consequences . ("Type safety via AffineScript"
                            "No npm dependencies"
                            "Performance via Rust"
                            "Python only for SaltStack"))))))
